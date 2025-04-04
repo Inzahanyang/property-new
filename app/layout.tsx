@@ -1,4 +1,10 @@
+import AuthProvider from "@/components/AuthProvider";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import { ToastContainer } from "react-toastify";
 import "@/assets/styles/globals.css";
+import "react-toastify/dist/ReactToastify.css";
+import { GlobalProvider } from "@/context/GlobalContext";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -12,10 +18,19 @@ export const metadata = {
 
 const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <html lang="en">
-      <head />
-      <body>{children}</body>
-    </html>
+    <AuthProvider>
+      <GlobalProvider>
+        <html lang="en">
+          <head />
+          <body>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <ToastContainer />
+          </body>
+        </html>
+      </GlobalProvider>
+    </AuthProvider>
   );
 };
 
